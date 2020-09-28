@@ -68,7 +68,6 @@ jobs:
       - name: Test docker image
         env:
           DOCKER_BUILDKIT: 1
-          COMMIT: ${{ github.sha }}
         run: ./test/test.sh container.py --tag ${GITHUB_SHA}
 
       # Upload coverage results to coveralls

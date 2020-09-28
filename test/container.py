@@ -50,7 +50,6 @@ class OrdersContainerTest(unittest.TestCase):
         self.payment_mock.start_container()
         self.shipping_mock.start_container()
         Docker().start_container(container_name=self.mongo_container_name, image="mongo", host="orders-db")
-        sleep(60)
         command = ['docker', 'run',
                    '-d',
                    '--name', OrdersContainerTest.container_name,

@@ -48,6 +48,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           push: false
+          dockerfile: docker/orders/Dockerfile
           repository: ${{ env.GROUP }}/${{ env.REPO }}
           tag_with_ref: true
           tag_with_sha: true
@@ -62,7 +63,7 @@ jobs:
       - name: Submit Coveralls
         env:
           COVERALL_TOKEN: ${{ secrets.COVERALL_TOKEN }}
-        run: mvn -DrepoToken=${COVERALL_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB
+        run: mvn -DrepoToken=${COVERALL_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB verify jacoco:report coveralls:report
 
       # Push to dockerhub
       - name: Push to Docker Hub
@@ -71,6 +72,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
+          dockerfile: docker/orders/Dockerfile
           repository: ${{ env.GROUP }}/${{ env.REPO }}
           tag_with_ref: true
           tag_with_sha: true

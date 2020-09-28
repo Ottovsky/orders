@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           push: false
-          dockerfile: docker/orders/Dockerfile
+          dockerfile: docker/orders/Dockerfile.github
           repository: ${{ env.GROUP }}/${{ env.REPO }}
           tag_with_ref: true
           tag_with_sha: true
@@ -72,7 +72,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
-          dockerfile: docker/orders/Dockerfile
+          dockerfile: docker/orders/Dockerfile.github
           repository: ${{ env.GROUP }}/${{ env.REPO }}
           tag_with_ref: true
           tag_with_sha: true
